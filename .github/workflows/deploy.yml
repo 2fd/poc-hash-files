@@ -17,13 +17,13 @@ jobs:
       matrix:
         modules:
           - name: a
-            files:
-              - "1.txt"
-              - "2.txt"
+            hash:
+              - "a/1.txt"
+              - "a/2.txt"
           - name: b
             files:
-              - "3.txt"
-              - "4.txt"
+              - "b/3.txt"
+              - "b/4.txt"
 
     steps:
       - uses: actions/checkout@v4
