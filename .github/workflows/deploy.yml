@@ -25,7 +25,7 @@ jobs:
       - id: hash
         working-directory:  ${{ matrix.modules.name }}
         run: |
-          echo "${{matrix.modules.name}}=${{matrix.modules.name}}_${{hashFiles('1.txt', '2.txt', '3.txt', '4.txt')}}" >> $GITHUB_OUTPUT
+          echo "${{matrix.modules.name}}=${{matrix.modules.name}}_${{hashFiles('0.txt')}}" >> $GITHUB_OUTPUT
 
   print:
     needs: setup
