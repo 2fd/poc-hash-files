@@ -21,14 +21,16 @@ jobs:
               - "a/1.txt"
               - "a/2.txt"
           - name: b
-            files: ${{hashFiles('b/3.txt', 'b/4.txt')}}
+            files:
+              - "b/3.txt"
+              - "b/4.txt"
 
     steps:
       - uses: actions/checkout@v4
 
       - id: hash
         run: |
-          echo "${{matrix.modules.name}}=${{matrix.modules.name}}_${{ hashFiles(matrix.modules.files) }}" >> $GITHUB_OUTPUT
+          echo "${{matrix.modules.name}}=${{matrix.modules.name}}_${{ hashFiles(join(matrix.modules.files, ', ')) }}" >> $GITHUB_OUTPUT
 
   print:
     needs: setup
