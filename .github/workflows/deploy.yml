@@ -30,7 +30,7 @@ jobs:
 
       - id: hash
         run: |
-          echo "${{matrix.modules.name}}=${{ hashFiles(matrix.modules.files) }}" >> $GITHUB_OUTPUT
+          echo "${{matrix.modules.name}}=${{matrix.modules.name}}_${{ hashFiles(matrix.modules.files) }}" >> $GITHUB_OUTPUT
 
   print:
     needs: setup
@@ -38,5 +38,5 @@ jobs:
 
     steps:
       - run: |
-          echo ${{ needs.setup.outputs.a }}
-          echo ${{ needs.setup.outputs.b }}
+          echo "needs.setup.outputs.a=${{ needs.setup.outputs.a }}"
+          echo "needs.setup.outputs.b=${{ needs.setup.outputs.b }}"
