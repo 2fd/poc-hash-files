@@ -26,6 +26,7 @@ jobs:
 
       - id: hash
         run: |
+          echo "${{matrix.modules.name}}=hashFiles(${{matrix.modules.files}})"
           echo "${{matrix.modules.name}}=${{matrix.modules.name}}_${{ hashFiles(matrix.modules.files) }}" >> $GITHUB_OUTPUT
 
   print:
