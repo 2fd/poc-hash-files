@@ -1,0 +1,42 @@
+name: POC
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    outputs:
+      a: ${{ steps.hash.outputs.a }}
+      b: ${{ steps.hash.outputs.b }}
+
+    strategy:
+      matrix:
+        modules:
+          - name: a
+            files:
+              - "1.txt"
+              - "2.txt"
+          - name: b
+            files:
+              - "3.txt"
+              - "4.txt"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: hash
+        run: |
+          echo "${{matrix.modules.name}}=${{ hashFiles(matrix.modules.files) }}" >> $GITHUB_OUTPUT
+
+  print:
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: |
+          echo ${{ needs.setup.outputs.a }}
+          echo ${{ needs.setup.outputs.b }}
