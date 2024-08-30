@@ -17,13 +17,7 @@ jobs:
       matrix:
         modules:
           - name: a
-            files:
-              - 'a/1.txt'
-              - 'a/2.txt'
           - name: b
-            files:
-              - 'b/3.txt'
-              - 'b/4.txt'
 
     steps:
       - uses: actions/checkout@v4
@@ -31,7 +25,12 @@ jobs:
       - id: hash
         run: |
           echo "${{matrix.modules.name}}=hashFiles(${{join(matrix.modules.files, ', ')}})"
-          echo "${{matrix.modules.name}}=${{matrix.modules.name}}_${{ hashFiles(join(matrix.modules.files, ', ')) }}" >> $GITHUB_OUTPUT
+          echo "${{matrix.modules.name}}=${{matrix.modules.name}}_${{ hashFiles(
+            format('{0}/1.txt', matrix.modules.name),
+            format('{0}/2.txt', matrix.modules.name),
+            format('{0}/3.txt', matrix.modules.name),
+            format('{0}/4.txt', matrix.modules.name),
+          ) }}" >> $GITHUB_OUTPUT
 
   print:
     needs: setup
