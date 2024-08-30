@@ -23,14 +23,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - id: hash
+        working-directory:  ${{ matrix.modules.name }}
         run: |
-          echo "${{matrix.modules.name}}=hashFiles(${{join(matrix.modules.files, ', ')}})"
-          echo "${{matrix.modules.name}}=${{matrix.modules.name}}_${{ hashFiles(
-            format('{0}/1.txt', matrix.modules.name),
-            format('{0}/2.txt', matrix.modules.name),
-            format('{0}/3.txt', matrix.modules.name),
-            format('{0}/4.txt', matrix.modules.name),
-          ) }}" >> $GITHUB_OUTPUT
+          echo "${{matrix.modules.name}}=${{matrix.modules.name}}_${{hashFiles('1.txt', '2.txt', '3.txt', '4.txt')}}" >> $GITHUB_OUTPUT
 
   print:
     needs: setup
