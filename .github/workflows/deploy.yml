@@ -17,9 +17,9 @@ jobs:
       matrix:
         modules:
           - name: a
-            hash: "a/2.txt"
+            files: 'a/2.txt'
           - name: b
-            files: "b/3.txt"
+            files: 'b/3.txt'
 
     steps:
       - uses: actions/checkout@v4
