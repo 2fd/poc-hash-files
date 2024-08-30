@@ -21,9 +21,7 @@ jobs:
               - "a/1.txt"
               - "a/2.txt"
           - name: b
-            files:
-              - "b/3.txt"
-              - "b/4.txt"
+            files: ${{hashFiles('b/3.txt', 'b/4.txt')}}
 
     steps:
       - uses: actions/checkout@v4
